@@ -7,6 +7,8 @@ import { StickyHeader } from "@/components/StickyHeader";
 import { BackButton } from "@/components/BackButton";
 import { OfficialLink } from "@/components/OfficialLink";
 
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
 export default async function RaceDetailPage({
   params,
 }: {
