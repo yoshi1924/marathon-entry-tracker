@@ -9,12 +9,14 @@ export default function GaPageView() {
 
   useEffect(() => {
     const gaId = process.env.NEXT_PUBLIC_GA_ID;
-    if (!gaId) return;
+	if (!gaId) return;
+	if (typeof window === "undefined") return;
+	if (!window.gtag) return;
 
     const query = searchParams?.toString();
     const url = pathname + (query ? `?${query}` : "");
 
-    window.gtag?.("config", gaId, { page_path: url });
+    window.gtag("config", gaId, { page_path: url });
   }, [pathname, searchParams]);
 
   return null;
