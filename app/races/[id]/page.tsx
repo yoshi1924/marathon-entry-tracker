@@ -109,7 +109,7 @@ export default async function RaceDetailPage({
         </div>
       </div>
 
-    StickyHeader  <section className="mt-6">
+    <section className="mt-6">
         <div className="mb-2 text-base font-semibold">エントリー枠</div>
         <div className="grid gap-3">
           {windows.map(({ w, status }) => (
