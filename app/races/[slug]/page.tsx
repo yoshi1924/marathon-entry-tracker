@@ -34,8 +34,26 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function RaceDetailPage({ params }: Props) {
-  const race = races.find((r) => r.slug === params.slug);
-  if (!race) return notFound();
+//  const race = races.find((r) => r.slug === params.slug);
+//  if (!race) return notFound();
+
+const race = races.find((r) => r.slug === params.slug);
+
+// 一時切り分け（原因が分かったら notFound() に戻す）
+if (!race) {
+  return (
+    <main className="p-6">
+      <h1 className="text-xl font-bold">Race not found</h1>
+      <p className="mt-2 text-sm">slug: {params.slug}</p>
+      <p className="mt-2 text-sm">races count: {races.length}</p>
+      <p className="mt-2 text-xs text-gray-500">
+        ※この表示は切り分け用（あとで戻す）
+      </p>
+    </main>
+  );
+}
+
+
 
   const windows = entryWindows
     .filter((w) => w.raceSlug === race.slug) // ★ raceSlug基準
