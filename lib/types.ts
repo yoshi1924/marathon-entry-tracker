@@ -18,17 +18,16 @@ export type Race = {
 
 export type EntryWindow = {
   id: number;
-  raceId: number;
+  raceSlug: string; // ★ raceId → raceSlug
   title: string;
   kind: EntryWindowKind;
   method: EntryMethod;
-  startAt?: string; // ISO
-  endAt?: string;   // ISO
-  resultAt?: string; // ISO
+  startAt?: string;
+  endAt?: string;
+  resultAt?: string;
   officialUrl?: string;
   notes?: string;
 };
-
 export type Watch = {
   raceId: number;          // freeはrace単位のみ
   createdAt: string;       // ISO

@@ -140,7 +140,14 @@ export default async function RaceDetailPage({ params }: Props) {
           </div>
 
           <div className="mt-4 flex gap-2">
-            <OfficialLink href={officialUrl} />
+	<OfficialLink
+		  raceId={race.id}
+		  raceName={race.name}
+		  url={officialUrl}
+		  className="inline-flex w-full items-center justify-center rounded-xl bg-black px-4 py-3 text-sm font-semibold text-white"
+	>
+	  公式サイトへ →
+	</OfficialLink>
           </div>
 
           <div id="watch-area" className="mt-3">
