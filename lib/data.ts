@@ -7,18 +7,17 @@ import { Race, EntryWindow } from "./types";
 const VERIFIED = "2026-02-20";
 
 /* =========================
- * 大会マスタ（20大会）
- * =========================
- * 方針：
- * - フル/ハーフ/30K も含める（大会規模は後で絞り込み可能）
- * - eventDate は「現時点で公式/募集要項で確認できた開催日」
- * - 未発表のものは入れない（今回は0件）
- */
+ * 大会マスタ（例：増やしていく前提のセット）
+ * - 「これから開催」だけ
+ * - 需要優先：RUNNET / SportsEntry 由来も混在OK
+ * ========================= */
 export const races: Race[] = [
-  // 1 東京マラソン
+  // ====== 大型・注目 ======
   {
     id: 1,
-    name: "東京マラソン2026",
+    slug: "tokyo-marathon-2026",
+    year: 2026,
+    name: "東京マラソン",
     prefecture: "東京",
     city: "東京",
     venueArea: "都心部",
@@ -27,11 +26,11 @@ export const races: Race[] = [
     officialUrl: "https://www.marathon.tokyo/",
     lastVerifiedAt: VERIFIED,
   },
-
-  // 2 板橋City
   {
     id: 2,
-    name: "板橋Cityマラソン2026",
+    slug: "itabashi-city-marathon-2026",
+    year: 2026,
+    name: "板橋Cityマラソン",
     prefecture: "東京",
     city: "板橋",
     venueArea: "荒川河川敷",
@@ -40,76 +39,11 @@ export const races: Race[] = [
     officialUrl: "https://i-c-m.jp/",
     lastVerifiedAt: VERIFIED,
   },
-
-  // 3 さいたま
   {
     id: 3,
-    name: "さいたまマラソン2026",
-    prefecture: "埼玉",
-    city: "さいたま",
-    venueArea: "さいたま新都心周辺",
-    eventDate: "2026-02-08",
-    distances: ["フル"],
-    officialUrl: "https://saitama-marathon.jp/",
-    lastVerifiedAt: VERIFIED,
-  },
-
-  // 4 横浜
-  {
-    id: 4,
-    name: "横浜マラソン2026",
-    prefecture: "神奈川",
-    city: "横浜",
-    venueArea: "みなとみらい周辺",
-    eventDate: "2026-10-25",
-    distances: ["フル", "ハーフ"],
-    officialUrl: "https://yokohamamarathon.jp/",
-    lastVerifiedAt: VERIFIED,
-  },
-
-  // 5 ちばアクアライン
-  {
-    id: 5,
-    name: "ちばアクアラインマラソン2026",
-    prefecture: "千葉",
-    city: "木更津・袖ケ浦",
-    venueArea: "東京湾アクアライン",
-    eventDate: "2026-11-08",
-    distances: ["フル", "ハーフ"],
-    officialUrl: "https://chiba-aqualine-marathon.com/",
-    lastVerifiedAt: VERIFIED,
-  },
-
-  // 6 立川シティハーフ
-  {
-    id: 6,
-    name: "立川シティハーフマラソン2026",
-    prefecture: "東京",
-    city: "立川",
-    venueArea: "昭和記念公園周辺",
-    eventDate: "2026-03-08",
-    distances: ["ハーフ", "10km"],
-    officialUrl: "https://tachikawa-half.jp/",
-    lastVerifiedAt: VERIFIED,
-  },
-
-  // 7 青梅マラソン（30K）
-  {
-    id: 7,
-    name: "青梅マラソン2026",
-    prefecture: "東京",
-    city: "青梅",
-    venueArea: "青梅市内",
-    eventDate: "2026-02-15",
-    distances: ["30km", "10km"],
-    officialUrl: "https://www.ohme-marathon.jp/",
-    lastVerifiedAt: VERIFIED,
-  },
-
-  // 8 かすみがうら
-  {
-    id: 8,
-    name: "かすみがうらマラソン2026",
+    slug: "kasumigaura-marathon-2026",
+    year: 2026,
+    name: "かすみがうらマラソン",
     prefecture: "茨城",
     city: "土浦",
     venueArea: "霞ヶ浦周辺",
@@ -118,24 +52,24 @@ export const races: Race[] = [
     officialUrl: "https://www.kasumigaura-marathon.jp/",
     lastVerifiedAt: VERIFIED,
   },
-
-  // 9 勝田全国
   {
-    id: 9,
-    name: "勝田全国マラソン2026",
-    prefecture: "茨城",
-    city: "ひたちなか・東海",
-    venueArea: "ひたちなか市〜東海村",
-    eventDate: "2026-01-25",
-    distances: ["フル"],
-    officialUrl: "https://katsutamarathon.jp/",
+    id: 4,
+    slug: "yokohama-marathon-2026",
+    year: 2026,
+    name: "横浜マラソン",
+    prefecture: "神奈川",
+    city: "横浜",
+    venueArea: "みなとみらい周辺",
+    eventDate: "2026-10-25",
+    distances: ["フル", "ハーフ"],
+    officialUrl: "https://yokohamamarathon.jp/",
     lastVerifiedAt: VERIFIED,
   },
-
-  // 10 水戸黄門漫遊
   {
-    id: 10,
-    name: "水戸黄門漫遊マラソン2026",
+    id: 5,
+    slug: "mitokomon-manyu-marathon-2026",
+    year: 2026,
+    name: "水戸黄門漫遊マラソン",
     prefecture: "茨城",
     city: "水戸",
     venueArea: "水戸市内",
@@ -144,188 +78,150 @@ export const races: Race[] = [
     officialUrl: "https://mitokomon-manyu-marathon.com/",
     lastVerifiedAt: VERIFIED,
   },
-
-  // 11 つくば（※2026版未確定のため最新公開版を採用）
   {
-    id: 11,
-    name: "つくばマラソン（最新公開版）",
-    prefecture: "茨城",
-    city: "つくば",
-    venueArea: "つくば市内",
-    eventDate: "2025-11-23",
-    distances: ["フル"],
-    officialUrl: "https://www.tsukuba-marathon.com/",
+    id: 6,
+    slug: "chiba-aqualine-marathon-2026",
+    year: 2026,
+    name: "ちばアクアラインマラソン",
+    prefecture: "千葉",
+    city: "木更津・袖ケ浦",
+    venueArea: "東京湾アクアライン",
+    eventDate: "2026-11-08",
+    distances: ["フル", "ハーフ", "ペア"],
+    officialUrl: "https://chiba-aqualine-marathon.com/runner/entry.html",
     lastVerifiedAt: VERIFIED,
   },
 
-  // 12 小江戸川越ハーフ（※2026版未確定のため最新公開版を採用）
+  // ====== “常に新規が発生する”系（記録会/フェス/リレー含む） ======
   {
-    id: 12,
-    name: "小江戸川越ハーフマラソン（最新公開版）",
+    id: 101,
+    slug: "akabane-trial-93-2026",
+    year: 2026,
+    name: "赤羽トライアル（第93回）",
+    prefecture: "東京",
+    city: "北区",
+    venueArea: "新荒川大橋付近",
+    eventDate: "2026-03-08",
+    distances: ["フル", "30km", "ハーフ", "10km", "5km"],
+    officialUrl: "https://www.sportsentry.ne.jp/events/full/kanto",
+    lastVerifiedAt: VERIFIED,
+  },
+  {
+    id: 102,
+    slug: "marathon-festival-showakinen-flower-2026",
+    year: 2026,
+    name: "マラソンフェスティバル in 国営昭和記念公園 FLOWER",
+    prefecture: "東京",
+    city: "立川",
+    venueArea: "国営昭和記念公園周辺",
+    eventDate: "2026-03-14",
+    distances: ["30km", "ハーフ", "10km", "5km", "親子ペア"],
+    officialUrl: "https://runnet.jp/entry/runtes/user/pc/RaceSearchZZSDetailAction.do?command=search&zone=08-14",
+    lastVerifiedAt: VERIFIED,
+  },
+  {
+    id: 103,
+    slug: "tokyo-shinagawa-marathon-festa-2026",
+    year: 2026,
+    name: "東京・品川マラソンフェスタ",
+    prefecture: "東京",
+    city: "品川",
+    venueArea: "（公式ページ参照）",
+    eventDate: "2026-03-14",
+    distances: ["フル", "ハーフ", "12km", "6km", "リレー", "親子ペア"],
+    officialUrl: "https://runnet.jp/entry/runtes/user/pc/RaceSearchZZSDetailAction.do?command=search&zone=08-14",
+    lastVerifiedAt: VERIFIED,
+  },
+  {
+    id: 104,
+    slug: "flower-relay-showakinen-2026",
+    year: 2026,
+    name: "フラワーリレーマラソン in 国営昭和記念公園",
+    prefecture: "東京",
+    city: "立川",
+    venueArea: "国営昭和記念公園（うんどう広場）",
+    eventDate: "2026-03-15",
+    distances: ["フル", "ハーフ", "リレー"],
+    officialUrl: "https://www.sportsentry.ne.jp/events/full/kanto",
+    lastVerifiedAt: VERIFIED,
+  },
+  {
+    id: 105,
+    slug: "underarmour-toyosu-bayside-run-2026",
+    year: 2026,
+    name: "アンダーアーマー豊洲ベイサイドラン",
+    prefecture: "東京",
+    city: "江東区",
+    venueArea: "豊洲（豊洲公園・春海橋公園・豊洲ぐるり公園）",
+    eventDate: "2026-04-11", // 4/11-4/12の複数日程（開始日で代表）
+    distances: ["ハーフ", "10km", "5km"],
+    officialUrl: "https://www.sportsentry.ne.jp/events/running/kanto",
+    lastVerifiedAt: VERIFIED,
+  },
+  {
+    id: 106,
+    slug: "gyoda-tekken-marathon-40-2026",
+    year: 2026,
+    name: "行田市鉄剣マラソン大会（第40回）",
     prefecture: "埼玉",
-    city: "川越",
-    venueArea: "川越市内",
-    eventDate: "2025-11-30",
-    distances: ["ハーフ", "10km"],
-    officialUrl: "https://www.koedo-marathon.com/",
+    city: "行田",
+    venueArea: "古代蓮の里〜さきたま古墳公園（市内周回）",
+    eventDate: "2026-04-05",
+    distances: ["ハーフ", "10km", "5km"],
+    officialUrl: "https://www.sportsentry.ne.jp/events/half/kanto",
     lastVerifiedAt: VERIFIED,
   },
-
-  // 13 ぐんまマラソン（※2026版未確定のため最新公開版を採用）
   {
-    id: 13,
-    name: "ぐんまマラソン（最新公開版）",
-    prefecture: "群馬",
-    city: "前橋",
-    venueArea: "前橋市内",
-    eventDate: "2025-11-03",
-    distances: ["フル", "10km"],
-    officialUrl: "https://www.g-marathon.com/",
-    lastVerifiedAt: VERIFIED,
-  },
-
-  // 14 湘南国際（※2026版未確定のため最新公開版を採用）
-  {
-    id: 14,
-    name: "湘南国際マラソン（最新公開版）",
-    prefecture: "神奈川",
-    city: "大磯・湘南沿岸",
-    venueArea: "大磯〜湘南沿岸",
-    eventDate: "2025-12-07",
-    distances: ["フル", "10km"],
-    officialUrl: "https://www.shonan-kokusai.jp/",
-    lastVerifiedAt: VERIFIED,
-  },
-
-  // 15 東京レガシーハーフ（※2026版は開催日「調整中」表示のため最新開催実績を採用）
-  {
-    id: 15,
-    name: "東京レガシーハーフマラソン（最新開催実績）",
-    prefecture: "東京",
-    city: "東京",
-    venueArea: "国立競技場周辺",
-    eventDate: "2025-10-19",
-    distances: ["ハーフ"],
-    officialUrl: "https://legacyhalf.tokyo/",
-    lastVerifiedAt: VERIFIED,
-  },
-
-  // 16 新宿シティハーフ
-  {
-    id: 16,
-    name: "新宿シティハーフマラソン2026",
-    prefecture: "東京",
-    city: "新宿",
-    venueArea: "国立競技場周辺",
-    eventDate: "2026-01-25",
-    distances: ["ハーフ", "10km"],
-    officialUrl: "https://www.shinjukucity-halfmarathon.jp/",
-    lastVerifiedAt: VERIFIED,
-  },
-
-  // 17 川崎国際EKIDEN（フル駅伝・※最新公開版）
-  {
-    id: 17,
-    name: "川崎国際EKIDEN（最新公開版）",
-    prefecture: "神奈川",
-    city: "川崎",
-    venueArea: "川崎市内",
-    eventDate: "2025-12-14",
-    distances: ["フル"],
-    officialUrl: "https://runnet.jp/entry/runtes/user/pc/raceDetailAction.do?raceId=378558",
-    lastVerifiedAt: VERIFIED,
-  },
-
-  // 18 二子玉エコマラソン（※最新公開版）
-  {
-    id: 18,
-    name: "二子玉エコマラソン（最新公開版）",
-    prefecture: "神奈川",
-    city: "川崎",
-    venueArea: "多摩川河川敷",
-    eventDate: "2025-06-15",
-    distances: ["ハーフ", "10km"],
-    officialUrl: "https://www.ecomarathon.run/",
-    lastVerifiedAt: VERIFIED,
-  },
-
-  // 19 千葉マラソンフェスタ（※最新公開版）
-  {
-    id: 19,
-    name: "千葉マラソンフェスタ（最新公開版）",
+    id: 107,
+    slug: "inage-hana-marathon-14-2026",
+    year: 2026,
+    name: "稲毛花のマラソン（第14回）",
     prefecture: "千葉",
     city: "千葉",
-    venueArea: "蘇我スポーツ公園周辺",
-    eventDate: "2025-11-23",
-    distances: ["12km", "6km"],
-    officialUrl: "https://gsrun.jp/chiba/",
+    venueArea: "稲毛海浜公園",
+    eventDate: "2026-05-24",
+    distances: ["フル", "ハーフ", "10km", "5km", "ペア", "ファミリー"],
+    officialUrl: "https://www.sportsentry.ne.jp/events/full/kanto",
     lastVerifiedAt: VERIFIED,
   },
-
-  // 20 柏の葉パークマラソン（※最新公開版）
   {
-    id: 20,
-    name: "柏の葉パークマラソン（最新公開版）",
-    prefecture: "千葉",
-    city: "柏",
-    venueArea: "柏の葉公園周辺",
-    eventDate: "2026-02-11",
-    distances: ["フル", "ハーフ", "30km", "10km"],
-    officialUrl: "https://www.goodsports.jp/gs-marathon/ichiran/0211kashiwanoha-park2026/",
+    id: 108,
+    slug: "boost-running-festa-ajinomoto-2026",
+    year: 2026,
+    name: "BOOSTランニングフェスタ in 味の素スタジアム（リレー）",
+    prefecture: "東京",
+    city: "調布",
+    venueArea: "味の素スタジアム",
+    eventDate: "2026-06-14",
+    distances: ["リレー", "（種目は公式参照）"],
+    officialUrl: "https://www.sportsentry.ne.jp/events/full/kanto",
     lastVerifiedAt: VERIFIED,
   },
 ];
 
 /* =========================
- * エントリー枠（一般枠中心）
- * ※ JST (+09:00) 統一
+ * エントリー枠（raceSlugで紐付け）
+ * - 取れているものだけ先に入れる
+ * - 公式に時間が書かれてない場合は 00:00/23:59:59 で丸める
  * ========================= */
 export const entryWindows: EntryWindow[] = [
-  // 1 東京マラソン2026（一般抽選）
+  // 東京マラソン（一般抽選）
   {
-    id: 101,
-    raceId: 1,
+    id: 10001,
+    raceSlug: "tokyo-marathon-2026",
     title: "一般（抽選）",
     kind: "general",
     method: "lottery",
     startAt: "2025-08-15T11:00:00+09:00",
     endAt: "2025-08-29T17:00:00+09:00",
     resultAt: "2025-09-19T12:00:00+09:00",
-    officialUrl: "https://www.marathon.tokyo/participants/",
+    officialUrl: "https://www.marathon.tokyo/participants/guideline/",
   },
 
-  // 2 板橋Cityマラソン2026（一般先着）
+  // ちばアクアライン（一般先着）※「一般枠など」開始=3/22 20:00 が自治体告知で明記
   {
-    id: 201,
-    raceId: 2,
-    title: "一般（先着）",
-    kind: "general",
-    method: "first_come",
-    startAt: "2025-08-01T10:00:00+09:00",
-    endAt: "2025-11-24T23:59:59+09:00",
-    officialUrl: "https://i-c-m.jp/top-entry/",
-  },
-
-  // 3 さいたまマラソン2026（一般先着）※定員で早期締切になった情報に合わせている
-  {
-    id: 301,
-    raceId: 3,
-    title: "一般（先着）",
-    kind: "general",
-    method: "first_come",
-    startAt: "2025-07-10T12:00:00+09:00",
-    endAt: "2025-09-19T23:59:59+09:00",
-    officialUrl: "https://saitama-marathon.jp/about/",
-  },
-
-  // 4 横浜マラソン2026
-  // ※ 2026-02-20 時点：エントリー開始/終了日時が未公開（新サイトで案内予定）
-  //   → 公開されたらここに追加
-
-  // 5 ちばアクアラインマラソン2026（一般先着）
-  {
-    id: 501,
-    raceId: 5,
+    id: 10002,
+    raceSlug: "chiba-aqualine-marathon-2026",
     title: "一般（先着）",
     kind: "general",
     method: "first_come",
@@ -334,175 +230,104 @@ export const entryWindows: EntryWindow[] = [
     officialUrl: "https://chiba-aqualine-marathon.com/runner/entry.html",
   },
 
-  // 6 立川シティハーフマラソン2026（一般先着）
+  // 赤羽トライアル
   {
-    id: 601,
-    raceId: 6,
+    id: 10003,
+    raceSlug: "akabane-trial-93-2026",
     title: "一般（先着）",
     kind: "general",
     method: "first_come",
-    startAt: "2025-10-17T10:00:00+09:00",
-    endAt: "2025-11-14T23:59:59+09:00",
-    officialUrl: "https://tachikawa-half.jp/pages/detail2026",
+    startAt: "2025-12-16T00:00:00+09:00",
+    endAt: "2026-03-03T23:59:59+09:00",
+    officialUrl: "https://www.sportsentry.ne.jp/events/full/kanto",
   },
 
-  // 7 青梅マラソン2026（一般先着）
+  // マラソンフェスティバル昭和記念公園（RUNNET）
   {
-    id: 701,
-    raceId: 7,
+    id: 10004,
+    raceSlug: "marathon-festival-showakinen-flower-2026",
     title: "一般（先着）",
     kind: "general",
     method: "first_come",
-    startAt: "2025-08-15T12:00:00+09:00",
-    endAt: "2025-10-31T23:59:59+09:00",
-    officialUrl: "https://www.ohme-marathon.jp/news/jimukyoku/2025/07/10/8979",
-  },
-
-  // 8 かすみがうらマラソン2026（通常）
-  {
-    id: 801,
-    raceId: 8,
-    title: "通常（先着）",
-    kind: "general",
-    method: "first_come",
-    startAt: "2025-12-01T10:00:00+09:00",
-    endAt: "2026-01-25T23:59:59+09:00",
-    officialUrl: "https://www.kasumigaura-marathon.jp/entry/",
-  },
-  // 8 かすみがうらマラソン2026（レイト）
-  {
-    id: 802,
-    raceId: 8,
-    title: "レイト（先着）",
-    kind: "general",
-    method: "first_come",
-    startAt: "2026-02-01T10:00:00+09:00",
+    startAt: "2025-08-23T00:00:00+09:00",
     endAt: "2026-02-28T23:59:59+09:00",
-    officialUrl: "https://www.kasumigaura-marathon.jp/entry/",
-  },
-
-  // 9 勝田全国マラソン2026（一般）
-  {
-    id: 901,
-    raceId: 9,
-    title: "一般（先着）",
-    kind: "general",
-    method: "first_come",
-    startAt: "2025-09-26T00:00:00+09:00",
-    endAt: "2025-10-31T23:59:59+09:00",
-    officialUrl: "https://katsutamarathon.jp/top_entry/",
-  },
-
-  // 10 水戸黄門漫遊マラソン2026（一般）
-  {
-    id: 1001,
-    raceId: 10,
-    title: "一般（先着）",
-    kind: "general",
-    method: "first_come",
-    startAt: "2026-04-24T10:00:00+09:00",
-    endAt: "2026-06-30T23:59:59+09:00",
-    officialUrl: "https://mitokomon-manyu-marathon.com/about/",
-  },
-
-  // 11 つくば（最新公開版）
-  {
-    id: 1101,
-    raceId: 11,
-    title: "一般（先着）",
-    kind: "general",
-    method: "first_come",
-    startAt: "2025-07-06T20:00:00+09:00",
-    endAt: "2025-07-28T18:00:00+09:00",
-    officialUrl: "https://runnet.jp/cgi-bin/?id=376503",
-  },
-
-  // 12 小江戸川越ハーフ（最新公開版）
-  {
-    id: 1201,
-    raceId: 12,
-    title: "一般（先着）",
-    kind: "general",
-    method: "first_come",
-    startAt: "2025-08-05T12:00:00+09:00",
-    endAt: "2025-09-15T23:59:59+09:00",
-    officialUrl: "https://www.sportsentry.ne.jp/event/t/101108",
-  },
-
-  // 13 ぐんまマラソン（最新公開版）
-  {
-    id: 1301,
-    raceId: 13,
-    title: "一般（先着）",
-    kind: "general",
-    method: "first_come",
-    startAt: "2025-04-10T10:00:00+09:00",
-    endAt: "2025-08-18T23:59:59+09:00",
-    officialUrl: "https://www.g-marathon.com/entry/",
-  },
-
-  // 14 湘南国際（最新公開版）
-  {
-    id: 1401,
-    raceId: 14,
-    title: "一般（先着）",
-    kind: "general",
-    method: "first_come",
-    startAt: "2025-04-05T20:00:00+09:00",
-    endAt: "2025-09-21T23:59:59+09:00",
-    officialUrl: "https://www.shonan-kokusai.jp/entry/",
-  },
-
-  // 15 東京レガシーハーフ（※2026は開催日未公開のため、枠は未登録）
-  // 16 新宿シティハーフ2026
-  {
-    id: 1601,
-    raceId: 16,
-    title: "一般（先着）",
-    kind: "general",
-    method: "first_come",
-    startAt: "2025-09-08T12:30:00+09:00",
-    endAt: "2025-10-31T23:59:59+09:00",
-    officialUrl: "https://www.sportsentry.ne.jp/event/t/101218",
-  },
-
-  // 17 川崎国際EKIDEN（最新公開版）
-  {
-    id: 1701,
-    raceId: 17,
-    title: "一般（先着）",
-    kind: "general",
-    method: "first_come",
-    startAt: "2025-07-24T00:00:00+09:00",
-    endAt: "2025-11-17T23:59:59+09:00",
     officialUrl:
-      "https://runnet.jp/entry/runtes/user/pc/raceDetailAction.do?raceId=378558",
+      "https://runnet.jp/entry/runtes/user/pc/RaceSearchZZSDetailAction.do?command=search&zone=08-14",
   },
 
-  // 18 二子玉エコマラソン（最新公開版）
+  // 東京・品川マラソンフェスタ（RUNNET）
   {
-    id: 1801,
-    raceId: 18,
+    id: 10005,
+    raceSlug: "tokyo-shinagawa-marathon-festa-2026",
     title: "一般（先着）",
     kind: "general",
     method: "first_come",
-    startAt: "2025-03-01T00:00:00+09:00",
-    endAt: "2025-06-02T23:59:59+09:00",
-    officialUrl: "https://www.sportsentry.ne.jp/event/t/99654",
+    startAt: "2025-12-05T00:00:00+09:00",
+    endAt: "2026-02-24T23:59:59+09:00",
+    officialUrl:
+      "https://runnet.jp/entry/runtes/user/pc/RaceSearchZZSDetailAction.do?command=search&zone=08-14",
   },
 
-  // 19 千葉マラソンフェスタ（最新公開版）
+  // フラワーリレー昭和記念公園
   {
-    id: 1901,
-    raceId: 19,
+    id: 10006,
+    raceSlug: "flower-relay-showakinen-2026",
     title: "一般（先着）",
     kind: "general",
     method: "first_come",
-    startAt: "2025-??-??T00:00:00+09:00",
-    endAt: "2025-11-04T23:59:59+09:00",
-    officialUrl: "https://www.goodsports.jp/gs-marathon/ichiran/1123chiba2025/",
+    startAt: "2025-10-03T00:00:00+09:00",
+    endAt: "2026-03-01T23:59:59+09:00",
+    officialUrl: "https://www.sportsentry.ne.jp/events/full/kanto",
   },
-  // ↑ここだけ「開始日がページ上で明示されていない」ため、後で確定させてください（運用上は削除でもOK）
 
-  // 20 柏の葉パークマラソン（※募集開始/終了がページ上で明示されていないため枠は未登録）
+  // 豊洲ベイサイドラン
+  {
+    id: 10007,
+    raceSlug: "underarmour-toyosu-bayside-run-2026",
+    title: "一般（先着）",
+    kind: "general",
+    method: "first_come",
+    startAt: "2026-01-09T00:00:00+09:00",
+    endAt: "2026-03-29T23:59:59+09:00",
+    officialUrl: "https://www.sportsentry.ne.jp/events/running/kanto",
+  },
+
+  // 行田 鉄剣マラソン（※エントリーは既に終了だが、開催はこれから）
+  {
+    id: 10008,
+    raceSlug: "gyoda-tekken-marathon-40-2026",
+    title: "一般（先着）",
+    kind: "general",
+    method: "first_come",
+    startAt: "2025-10-03T00:00:00+09:00",
+    endAt: "2026-01-31T23:59:59+09:00",
+    officialUrl: "https://www.sportsentry.ne.jp/events/half/kanto",
+  },
+
+  // 稲毛花のマラソン
+  {
+    id: 10009,
+    raceSlug: "inage-hana-marathon-14-2026",
+    title: "一般（先着）",
+    kind: "general",
+    method: "first_come",
+    startAt: "2026-02-09T00:00:00+09:00",
+    endAt: "2026-05-06T23:59:59+09:00",
+    officialUrl: "https://www.sportsentry.ne.jp/events/full/kanto",
+  },
+
+  // BOOST 味スタ
+  {
+    id: 10010,
+    raceSlug: "boost-running-festa-ajinomoto-2026",
+    title: "一般（先着）",
+    kind: "general",
+    method: "first_come",
+    startAt: "2026-01-28T00:00:00+09:00",
+    endAt: "2026-05-24T23:59:59+09:00",
+    officialUrl: "https://www.sportsentry.ne.jp/events/full/kanto",
+  },
+
+  // ====== ここから先：エントリー未取得の大会は “枠なし”でOK ======
+  // 横浜 / 水戸 / かすみがうら / 板橋 などは、枠が確定したら追記する
 ];

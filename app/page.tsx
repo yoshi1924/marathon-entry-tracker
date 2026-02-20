@@ -4,34 +4,45 @@ import { RaceCard } from "@/components/RaceCard";
 
 export default function HomePage() {
   const open = entryWindows
-    .filter(w => getWindowStatus(w.startAt, w.endAt) === "open" && w.kind === "general")
+    .filter(
+      (w) =>
+        getWindowStatus(w.startAt, w.endAt) === "open" &&
+        w.kind === "general"
+    )
     .sort((a, b) => (a.endAt ?? "").localeCompare(b.endAt ?? ""))
     .slice(0, 7)
-    .map(w => {
-      const r = races.find(x => x.id === w.raceId)!;
+    .map((w) => {
+      const r = races.find((x) => x.slug === w.raceSlug)!; // ★ raceSlugで紐付け
       return { r, w };
     });
 
   const upcoming = entryWindows
-    .filter(w => getWindowStatus(w.startAt, w.endAt) === "upcoming" && w.kind === "general")
+    .filter(
+      (w) =>
+        getWindowStatus(w.startAt, w.endAt) === "upcoming" &&
+        w.kind === "general"
+    )
     .sort((a, b) => (a.startAt ?? "").localeCompare(b.startAt ?? ""))
     .slice(0, 5)
-    .map(w => {
-      const r = races.find(x => x.id === w.raceId)!;
+    .map((w) => {
+      const r = races.find((x) => x.slug === w.raceSlug)!; // ★ raceSlugで紐付け
       return { r, w };
     });
+
+  const lastVerified = races
+    .map((r) => r.lastVerifiedAt)
+    .filter(Boolean)
+    .sort()
+    .at(-1);
 
   return (
     <main className="px-4 pb-10 pt-6">
       <section className="rounded-2xl border p-4 shadow-sm">
-        <div className="text-xl font-bold leading-tight">
-          🏃 今エントリーできるマラソン大会がすぐ分かる
-        </div>
+        <h1 className="text-xl font-bold leading-tight">
+          今エントリーできるマラソン大会がすぐ分かる
+        </h1>
         <div className="mt-3 text-sm text-gray-600">
           「今エントリーできるか」「いつ始まるか」「もう締切か」を最短で判断。
-        </div>
-        <div className="mt-3 text-sm text-gray-600">
-          開発中のため実際に通知は飛びませんが、気になる機能があったら触ってみてください
         </div>
 
         <a
@@ -52,6 +63,7 @@ export default function HomePage() {
             <RaceCard
               key={w.id}
               raceId={r.id}
+              raceSlug={r.slug}   // ★ 追加
               raceName={r.name}
               prefecture={r.prefecture}
               distances={r.distances}
@@ -71,6 +83,7 @@ export default function HomePage() {
             <RaceCard
               key={w.id}
               raceId={r.id}
+              raceSlug={r.slug}   // ★ 追加
               raceName={r.name}
               prefecture={r.prefecture}
               distances={r.distances}
@@ -85,7 +98,7 @@ export default function HomePage() {
         <div className="mt-1">
           各大会の公式サイトを元に手動で確認しています。
           <br />
-          最終更新：{new Date().toISOString().slice(0, 10)}
+          最終更新：{lastVerified ? lastVerified.slice(0, 10) : "—"}
         </div>
       </section>
     </main>

@@ -4,6 +4,8 @@ export type WindowStatus = "open" | "upcoming" | "closed" | "unknown";
 
 export type Race = {
   id: number;
+  slug: string;        // 追加（例: "yokohama-marathon-2026"）
+  year: number;        // 追加（例: 2026）
   name: string;
   prefecture: string;
   city?: string;
