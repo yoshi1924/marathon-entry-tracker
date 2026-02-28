@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import { races, entryWindows } from "@/lib/data";
 
 export const dynamicParams = false;
+export const dynamic = "force-static";
 
 export async function generateStaticParams() {
   return races.map((r) => ({ slug: r.slug }));
