@@ -1,51 +1,34 @@
-import { notFound } from "next/navigation";
-import { races, entryWindows } from "@/lib/data";
-
-export const dynamicParams = false;
 export const dynamic = "force-static";
 
+import { notFound } from "next/navigation";
+import { races } from "@/lib/data";
+
 export async function generateStaticParams() {
-  return races.map((r) => ({ slug: r.slug }));
+  return races.map((r) => ({
+    slug: r.slug,
+  }));
 }
 
-export default function RacePage({
+export default function Page({
   params,
 }: {
   params: { slug: string };
 }) {
-  const race = races.find((r) => r.slug === params.slug);
-  if (!race) return notFound();
+  console.log("PARAMS:", params.slug);
 
-  const windows = entryWindows.filter(
-    (w) => w.raceSlug === params.slug
+  const race = races.find(
+    (r) => r.slug.trim() === params.slug.trim()
   );
+
+  if (!race) {
+    console.log("NOT FOUND:", params.slug);
+    return notFound();
+  }
 
   return (
     <main>
       <h1>{race.name}</h1>
-
-      <a
-        href={race.officialUrl}
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        公式サイト
-      </a>
-
-      <section>
-        <h2>エントリー</h2>
-        {windows.length === 0 ? (
-          <p>現在掲載中の募集期間はありません。</p>
-        ) : (
-          <ul>
-            {windows.map((w) => (
-              <li key={w.id}>
-                {w.title}（{w.startAt}〜{w.endAt}）
-              </li>
-            ))}
-          </ul>
-        )}
-      </section>
+      <p>{race.slug}</p>
     </main>
   );
 }
