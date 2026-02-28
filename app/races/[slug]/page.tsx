@@ -8,17 +8,33 @@ import { StickyHeader } from "@/components/StickyHeader";
 import { BackButton } from "@/components/BackButton";
 import { OfficialLink } from "@/components/OfficialLink";
 
-type Props = { params: { slug: string } };
+type PageProps = {
+  params: { slug: string };
+};
 
-// まずは1時間更新でOK（お試し版）
-export const revalidate = 3600;
+export default async function RaceDetailPage({ params }: PageProps) {
+  const slug = params.slug; // ← ここが空にならないのが正常
+  // デバッグ（1回だけ）
+  // console.log("slug", slug);
+
+  const race = races.find((r) => r.slug === slug);
+  if (!race) {
+    return (
+      <main className="p-6">
+        <h1 className="text-xl font-bold">Race not found</h1>
+        <p className="mt-2 text-sm">slug: {String(slug)}</p>
+        <p className="mt-2 text-sm">races count: {races.length}</p>
+      </main>
+    );
+  }
 
 export function generateStaticParams() {
   return races.map((r) => ({ slug: r.slug }));
 }
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const race = races.find((r) => r.slug === params.slug);
+export async function generateMetadata({ params }: PageProps) {
+  const slug = params.slug;
+  const race = races.find((r) => r.slug === slug);
   if (!race) return {};
 
   const title = `${race.name}${race.year}のエントリーはいつ？締切・受付状況まとめ`;
