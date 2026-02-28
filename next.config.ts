@@ -1,3 +1,4 @@
+export const dynamic = "force-static";
 import type { NextConfig } from "next";
 import { races } from "./lib/data";
 
