@@ -27,6 +27,7 @@ export default async function RaceDetailPage({ params }: PageProps) {
       </main>
     );
   }
+}
 
 export function generateStaticParams() {
   return races.map((r) => ({ slug: r.slug }));
