@@ -1,3 +1,5 @@
+// app/races/[slug]/page.tsx
+
 export const dynamic = "force-static";
 
 import { notFound } from "next/navigation";
@@ -14,14 +16,13 @@ export default function Page({
 }: {
   params: { slug: string };
 }) {
-  console.log("PARAMS:", params.slug);
+  if (!params || !params.slug) {
+    return notFound();
+  }
 
-  const race = races.find(
-    (r) => r.slug.trim() === params.slug.trim()
-  );
+  const race = races.find((r) => r.slug === params.slug);
 
   if (!race) {
-    console.log("NOT FOUND:", params.slug);
     return notFound();
   }
 
