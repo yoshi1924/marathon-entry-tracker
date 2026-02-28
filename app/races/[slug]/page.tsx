@@ -1,9 +1,6 @@
-// app/races/[slug]/page.tsx
 import { notFound } from "next/navigation";
 import { races, entryWindows } from "@/lib/data";
-import { OfficialLink } from "@/components/OfficialLink";
 
-// これを付けると「generateStaticParams 以外は生成しない」挙動になり、slug不一致は確実に404
 export const dynamicParams = false;
 
 export async function generateStaticParams() {
@@ -15,20 +12,24 @@ export default function RacePage({
 }: {
   params: { slug: string };
 }) {
-  const slug = params.slug;
-
-  const race = races.find((r) => r.slug === slug);
+  const race = races.find((r) => r.slug === params.slug);
   if (!race) return notFound();
 
-  // EntryWindow は raceSlug で紐付け
-  const windows = entryWindows.filter((w) => w.raceSlug === slug);
+  const windows = entryWindows.filter(
+    (w) => w.raceSlug === params.slug
+  );
 
   return (
     <main>
       <h1>{race.name}</h1>
 
-      {/* OfficialLink は children 必須 */}
-      <OfficialLink href={race.officialUrl}>公式サイト</OfficialLink>
+      <a
+        href={race.officialUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        公式サイト
+      </a>
 
       <section>
         <h2>エントリー</h2>
